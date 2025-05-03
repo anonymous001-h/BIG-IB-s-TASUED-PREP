@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Subjects - BIG IB's TASUED PREP</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>BIG IB's TASUED PREP</h1>
+                <p>Your Ultimate TASUED Post-UTME Preparation Platform</p>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Me</a></li>
+                    <li><a href="community.html">Community</a></li>
+                </ul>
+            </nav>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="select-subjects">
+            <div class="container">
+                <h2>Select Subjects for Your Test</h2>
+                <p>Choose one or more subjects you want to practice. You can select up to all available subjects.</p>
+                
+                <form id="subject-selection-form" action="configure-test.html" method="get">
+                    <div class="subjects-grid">
+                        <div class="subject-checkbox">
+                            <input type="checkbox" id="mathematics" name="subjects[]" value="mathematics">
+                            <label for="mathematics">Mathematics</label>
+                        </div>
+                        <div class="subject-checkbox">
+                            <input type="checkbox" id="english" name="subjects[]" value="english">
+                            <label for="english">English</label>
+                        </div>
+                        <div class="subject-checkbox">
+                            <input type="checkbox" id="biology" name="subjects[]" value="biology">
+                            <label for="biology">Biology</label>
+                        </div>
+                        <div class="subject-checkbox">
+                            <input type="checkbox" id="chemistry" name="subjects[]" value="chemistry">
+                            <label for="chemistry">Chemistry</label>
+                        </div>
+                        <div class="subject-checkbox">
+                            <input type="checkbox" id="physics" name="subjects[]" value="physics">
+                            <label for="physics">Physics</label>
+                        </div>
+                        <div class="subject-checkbox">
+                            <input type="checkbox" id="furtherMathematics" name="subjects[]" value="furtherMathematics">
+                            <label for="furtherMathematics">Further Mathematics</label>
+                        </div>
+                        <div class="subject-checkbox">
+                            <input type="checkbox" id="literature" name="subjects[]" value="literature">
+                            <label for="literature">Literature in English</label>
+                        </div>
+                        <div class="subject-checkbox">
+                            <input type="checkbox" id="islamicStudies" name="subjects[]" value="islamicStudies">
+                            <label for="islamicStudies">Islamic Studies</label>
+                        </div>
+                        <div class="subject-checkbox">
+                            <input type="checkbox" id="crs" name="subjects[]" value="crs">
+                            <label for="crs">Christian Religious Studies</label>
+                        </div>
+                        <div class="subject-checkbox">
+                            <input type="checkbox" id="government" name="subjects[]" value="government">
+                            <label for="government">Government</label>
+                        </div>
+                        <div class="subject-checkbox">
+                            <input type="checkbox" id="yoruba" name="subjects[]" value="yoruba">
+                            <label for="yoruba">Yoruba</label>
+                        </div>
+                        <div class="subject-checkbox">
+                            <input type="checkbox" id="accounting" name="subjects[]" value="accounting">
+                            <label for="accounting">Accounting</label>
+                        </div>
+                        <div class="subject-checkbox">
+                            <input type="checkbox" id="commerce" name="subjects[]" value="commerce">
+                            <label for="commerce">Commerce</label>
+                        </div>
+                        <div class="subject-checkbox">
+                            <input type="checkbox" id="tasuedStudies" name="subjects[]" value="tasuedStudies">
+                            <label for="tasuedStudies">Tasued Studies</label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <p id="selection-error" class="error-message"></p>
+                        <button type="submit" class="btn btn-primary">Continue</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h3>BIG IB's TASUED PREP</h3>
+                    <p>Helping TASUED aspirants achieve success</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Me</a></li>
+                        <li><a href="community.html">Community</a></li>
+                        <li><a href="select-subjects.html">Start Practice</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contact</h4>
+                    <p>Mudasiru Ibrahim Opemipo (BIG IB)</p>
+                    <p>200 Level Student</p>
+                    <p>Tai Solarin University of Education</p>
+                    <p>09165360312</p>
+                    <p>ibrahimmudasiru07@gmail.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 BIG IB's TASUED PREP. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('subject-selection-form').addEventListener('submit', function(e) {
+            const checkboxes = document.querySelectorAll('input[name="subjects[]"]:checked');
+            if (checkboxes.length === 0) {
+                e.preventDefault();
+                document.getElementById('selection-error').textContent = 'Please select at least one subject.';
+            }
+        });
+    </script>
+    <script src="js/script.js"></script>
+</body>
+</html>

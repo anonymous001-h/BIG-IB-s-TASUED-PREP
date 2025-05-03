@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configure Test - BIG IB's TASUED PREP</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>BIG IB's TASUED PREP</h1>
+                <p>Your Ultimate TASUED Post-UTME Preparation Platform</p>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Me</a></li>
+                    <li><a href="community.html">Community</a></li>
+                </ul>
+            </nav>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="configure-test">
+            <div class="container">
+                <h2>Configure Your Test</h2>
+                <p>Choose your test mode and settings.</p>
+                
+                <div class="selected-subjects">
+                    <h3>Selected Subjects:</h3>
+                    <div id="subjects-list" class="subjects-tags">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                </div>
+                
+                <form id="test-config-form" action="instructions.html" method="get">
+                    <!-- Hidden inputs for selected subjects will be added by JavaScript -->
+                    <div id="hidden-subjects"></div>
+                    
+                    <div class="config-options">
+                        <div class="config-section">
+                            <h3>Test Mode</h3>
+                            <div class="radio-options">
+                                <div class="radio-option">
+                                    <input type="radio" id="practice-mode" name="test-mode" value="practice" checked>
+                                    <label for="practice-mode">
+                                        <span class="option-title">Practice Test</span>
+                                        <span class="option-desc">20 questions per selected subject</span>
+                                    </label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" id="exam-mode" name="test-mode" value="exam">
+                                    <label for="exam-mode">
+                                        <span class="option-title">Exam Mode</span>
+                                        <span class="option-desc">40 questions per selected subject</span>
+                                    </label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" id="custom-mode" name="test-mode" value="custom">
+                                    <label for="custom-mode">
+                                        <span class="option-title">Custom Mode</span>
+                                        <span class="option-desc">Set your own number of questions</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="custom-questions-section" class="config-section" style="display: none;">
+                            <h3>Custom Questions</h3>
+                            <div class="custom-questions">
+                                <label for="questions-per-subject">Number of questions per subject:</label>
+                                <input type="number" id="questions-per-subject" name="custom-questions" min="5" max="50" value="20">
+                                <span class="input-note">Min: 5, Max: 50</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <a href="select-subjects.html" class="btn btn-outline">Back</a>
+                        <button type="submit" class="btn btn-primary">Continue to Instructions</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h3>BIG IB's TASUED PREP</h3>
+                    <p>Helping TASUED aspirants achieve success</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Me</a></li>
+                        <li><a href="community.html">Community</a></li>
+                        <li><a href="select-subjects.html">Start Practice</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contact</h4>
+                    <p>Mudasiru Ibrahim Opemipo (BIG IB)</p>
+                    <p>200 Level Student</p>
+                    <p>Tai Solarin University of Education</p>
+                    <p>09165360312</p>
+                    <p>ibrahimmudasiru07@gmail.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 BIG IB's TASUED PREP. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Get selected subjects from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const selectedSubjects = urlParams.getAll('subjects[]');
+        
+        // Display selected subjects
+        const subjectsList = document.getElementById('subjects-list');
+        const hiddenSubjects = document.getElementById('hidden-subjects');
+        
+        selectedSubjects.forEach(subject => {
+            // Create tag for display
+            const subjectTag = document.createElement('span');
+            subjectTag.className = 'subject-tag';
+            subjectTag.textContent = subject.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase());
+            subjectsList.appendChild(subjectTag);
+            
+            // Create hidden input for form submission
+            const hiddenInput = document.createElement('input');
+            hiddenInput.type = 'hidden';
+            hiddenInput.name = 'subjects[]';
+            hiddenInput.value = subject;
+            hiddenSubjects.appendChild(hiddenInput);
+        });
+        
+        // Toggle custom questions section
+        const customMode = document.getElementById('custom-mode');
+        const customQuestionsSection = document.getElementById('custom-questions-section');
+        
+        document.querySelectorAll('input[name="test-mode"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                if (customMode.checked) {
+                    customQuestionsSection.style.display = 'block';
+                } else {
+                    customQuestionsSection.style.display = 'none';
+                }
+            });
+        });
+    </script>
+    <script src="js/script.js"></script>
+</body>
+</html>

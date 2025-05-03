@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Instructions - BIG IB's TASUED PREP</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>BIG IB's TASUED PREP</h1>
+                <p>Your Ultimate TASUED Post-UTME Preparation Platform</p>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Me</a></li>
+                    <li><a href="community.html">Community</a></li>
+                </ul>
+            </nav>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="instructions">
+            <div class="container">
+                <h2>Test Instructions</h2>
+                <div class="instruction-card">
+                    <div class="test-summary">
+                        <h3>Your Test Summary</h3>
+                        <div class="summary-details">
+                            <div class="summary-item">
+                                <span class="summary-label">Subjects:</span>
+                                <div id="selected-subjects" class="subjects-tags">
+                                    <!-- Will be populated by JavaScript -->
+                                </div>
+                            </div>
+                            <div class="summary-item">
+                                <span class="summary-label">Test Mode:</span>
+                                <span id="test-mode" class="summary-value">Practice Mode</span>
+                            </div>
+                            <div class="summary-item">
+                                <span class="summary-label">Questions per Subject:</span>
+                                <span id="questions-count" class="summary-value">20</span>
+                            </div>
+                            <div class="summary-item">
+                                <span class="summary-label">Total Questions:</span>
+                                <span id="total-questions" class="summary-value">60</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="instruction-list">
+                        <h3>Important Instructions</h3>
+                        <ul>
+                            <li><i class="fas fa-info-circle"></i> This is a preparatory test for TASUED Post-UTME. Questions are not guaranteed to appear in the actual exam.</li>
+                            <li><i class="fas fa-clock"></i> There is no time limit, but try to complete the test in one sitting for best results.</li>
+                            <li><i class="fas fa-exclamation-triangle"></i> If you attempt to reload or leave the page during the test, you will receive a warning.</li>
+                            <li><i class="fas fa-mouse-pointer"></i> Use the "Next" and "Previous" buttons to navigate between questions.</li>
+                            <li><i class="fas fa-check-circle"></i> You can review your answers before final submission.</li>
+                            <li><i class="fas fa-list-ol"></i> After submission, you will receive detailed feedback on your performance.</li>
+                            <li><i class="fas fa-book"></i> Explanations will be provided for all questions after you submit your test.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <a href="javascript:history.back()" class="btn btn-outline">Back</a>
+                        <a href="exam.html" id="start-test-btn" class="btn btn-primary">Start Test</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h3>BIG IB's TASUED PREP</h3>
+                    <p>Helping TASUED aspirants achieve success</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Me</a></li>
+                        <li><a href="community.html">Community</a></li>
+                        <li><a href="select-subjects.html">Start Practice</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contact</h4>
+                    <p>Mudasiru Ibrahim Opemipo (BIG IB)</p>
+                    <p>200 Level Student</p>
+                    <p>Tai Solarin University of Education</p>
+                    <p>09165360312</p>
+                    <p>ibrahimmudasiru07@gmail.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 BIG IB's TASUED PREP. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Get parameters from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const selectedSubjects = urlParams.getAll('subjects[]');
+        const testMode = urlParams.get('test-mode');
+        const customQuestions = urlParams.get('custom-questions');
+        
+        // Display selected subjects
+        const subjectsList = document.getElementById('selected-subjects');
+        selectedSubjects.forEach(subject => {
+            const subjectTag = document.createElement('span');
+            subjectTag.className = 'subject-tag';
+            subjectTag.textContent = subject.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase());
+            subjectsList.appendChild(subjectTag);
+        });
+        
+        // Display test mode
+        const testModeElement = document.getElementById('test-mode');
+        let questionsPerSubject = 20; // Default for practice mode
+        
+        if (testMode === 'exam') {
+            testModeElement.textContent = 'Exam Mode';
+            questionsPerSubject = 40;
+        } else if (testMode === 'custom') {
+            testModeElement.textContent = 'Custom Mode';
+            questionsPerSubject = parseInt(customQuestions) || 20;
+        } else {
+            testModeElement.textContent = 'Practice Mode';
+        }
+        
+        // Display questions count
+        document.getElementById('questions-count').textContent = questionsPerSubject;
+        
+        // Calculate and display total questions
+        const totalQuestions = selectedSubjects.length * questionsPerSubject;
+        document.getElementById('total-questions').textContent = totalQuestions;
+        
+        // Update start test button to include parameters
+        const startTestBtn = document.getElementById('start-test-btn');
+        let examUrl = 'exam.html?';
+        
+        // Add subjects
+        selectedSubjects.forEach(subject => {
+            examUrl += `subjects[]=${subject}&`;
+        });
+        
+        // Add test mode and questions count
+        examUrl += `test-mode=${testMode}`;
+        if (testMode === 'custom') {
+            examUrl += `&custom-questions=${questionsPerSubject}`;
+        }
+        
+        startTestBtn.href = examUrl;
+    </script>
+    <script src="js/script.js"></script>
+</body>
+</html>
